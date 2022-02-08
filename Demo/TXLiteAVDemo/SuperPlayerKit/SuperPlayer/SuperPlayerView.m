@@ -48,7 +48,6 @@
 #import "TXVideoCustomProcessDelegate.h"
 #import "TXVodPlayConfig.h"
 #import "TXVodPlayListener.h"
-#import "TXVodPlayer.h"
 
 static UISlider *_volumeSlider;
 
@@ -82,6 +81,10 @@ static UISlider *_volumeSlider;
 }
 
 #pragma mark - life Cycle
+
+- (TXVodPlayer *)myVodPlayer{
+    return self.vodPlayer;
+}
 
 /**
  *  代码初始化调用此方法
@@ -1877,6 +1880,9 @@ static UISlider *_volumeSlider;
             // 不使用vodPlayer.autoPlay的原因是暂停的时候会黑屏，影响体验
             [self prepareAutoplay];
         }
+        if (EvtID == PLAY_EVT_RCV_FIRST_I_FRAME && [self.delegate respondsToSelector:@selector(superPlayerDidLoadFirstFrame:)]){
+            [self.delegate superPlayerDidLoadFirstFrame:self];
+        }
         if (EvtID == PLAY_EVT_VOD_PLAY_PREPARED) {
             // 防止暂停导致加载进度不消失
             if (self.isPauseByUser) [self.spinner stopAnimating];
@@ -1910,6 +1916,9 @@ static UISlider *_volumeSlider;
         } else if (EvtID == PLAY_EVT_CHANGE_RESOLUTION) {
             if (player.height != 0) {
                 self.videoRatio = (GLfloat)player.width / player.height;
+            }
+            if ([self.delegate respondsToSelector:@selector(superPlayerDidChangeResolution)]){
+                [self.delegate superPlayerDidChangeResolution];
             }
         }
     });
