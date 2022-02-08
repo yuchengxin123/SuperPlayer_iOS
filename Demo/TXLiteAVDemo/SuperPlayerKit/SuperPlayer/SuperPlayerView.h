@@ -4,6 +4,7 @@
 #import "SuperPlayer.h"
 #import "SuperPlayerModel.h"
 #import "SuperPlayerViewConfig.h"
+#import "TXVodPlayer.h"
 
 @class SuperPlayerControlView;
 @class SuperPlayerView;
@@ -24,6 +25,11 @@
 /// 播放错误通知
 - (void)superPlayerError:(SuperPlayerView *)player errCode:(int)code errMessage:(NSString *)why;
 // 需要通知到父view的事件在此添加
+///渲染第一帧
+- (void)superPlayerDidLoadFirstFrame:(SuperPlayerView *)player;
+
+///切换码率完成的回调
+- (void)superPlayerDidChangeResolution;
 @end
 
 /// 播放器的状态
@@ -43,6 +49,8 @@ typedef NS_ENUM(NSInteger, SuperPlayerLayoutStyle) {
 };
 
 @interface SuperPlayerView : UIView
+
+- (TXVodPlayer *)myVodPlayer;
 
 /** 设置代理 */
 @property(nonatomic, weak) id<SuperPlayerDelegate> delegate;
