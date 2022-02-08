@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
     spec.name = 'SuperPlayer'
-    spec.version = '9.5.0'
+    spec.version = '8.3.1'
     spec.license = { :type => 'MIT' }
     spec.homepage = 'https://cloud.tencent.com/product/player'
     spec.authors = { 'annidyfeng' => 'annidyfeng@tencent.com' }
     spec.summary = '超级播放器'
-    spec.source = { :git => 'https://github.com/yuchengxin123/SuperPlayer_iOS.git', :tag => 'v9.5.0' }
+    spec.source = { :git => 'https://github.com/Xiaohui666/SuperPlayer_iOS.git', :tag => 'v8.3.1' }
 
     spec.ios.deployment_target = '8.0'
     spec.tests_arc = true
@@ -17,12 +17,12 @@ Pod::Spec.new do |spec|
     spec.dependency 'TXLiteAVSDK_Player'
 
     spec.static_framework = true
-    spec.default_subspec = 'YCXPlayer'
+    spec.default_subspec = 'XHPlayer'
 
     spec.ios.framework    = ['SystemConfiguration','CoreTelephony', 'VideoToolbox', 'CoreGraphics', 'AVFoundation', 'Accelerate']
     spec.ios.library = 'z', 'resolv', 'iconv', 'stdc++', 'c++', 'sqlite3'
 
-     spec.subspec "YCXPlayer" do |s|
+     spec.subspec "XHPlayer" do |s|
          s.source_files = 'Demo/TXLiteAVDemo/SuperPlayerKit/SuperPlayer/**/*.{h,m}'
          s.resource = 'Demo/TXLiteAVDemo/SuperPlayerKit/SuperPlayer/Resource/*'
      end
